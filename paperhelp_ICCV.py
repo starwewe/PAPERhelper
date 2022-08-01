@@ -14,10 +14,11 @@ def download_file(url, dir, filename):
     filename=re.sub('[:\?/+"<>]'," ",filename)
     open(f"{dir}/{filename}.pdf", 'wb').write(r.content)
 
+
 class PaperHelper:
     def __init__(self, year):
         self.year = str(year)
-        webpage = requests.get(f"{CVF_URL}/CVPR{year}?day=all").text
+        webpage = requests.get(f"{CVF_URL}/ICCV{year}?day=all").text
         open('temp.html','w',encoding='utf-8').write(webpage)
         webpage = open('temp.html').read()
         webpage = html.unescape(webpage)
@@ -41,7 +42,7 @@ class PaperHelper:
         paper_idx_list = self.search_keyword(kw)
         try:
             assert len(paper_idx_list) > 0
-            download_dir = f"./CVPR{self.year}-{kw}/"
+            download_dir = f"./ICCV{self.year}-{kw}/"
             print (f"Downloading in {download_dir}...")
             os.makedirs(download_dir, exist_ok=True)
             bar = tqdm(paper_idx_list)
@@ -54,9 +55,9 @@ class PaperHelper:
             
     
 if __name__ == '__main__':
-    kw = "cluster"
+    kw = "Pathology"
     # kw='graph'
     # kw=sys.argv[1]
-    helper = PaperHelper(2022)
+    helper = PaperHelper(2021)
     print(f"Searching for \"{kw}\"...")
     helper.download_keyword(kw)
