@@ -28,7 +28,7 @@ def fancy_word_cloud(name,year):
     wc.generate(text)
     plt.axis("off")
     plt.imshow(wc, interpolation="bilinear")
-    plt.savefig(f'worldcloud/{name+str(year)}.png',dpi=1200)
+    plt.savefig(f'{name+str(year)}.png',dpi=1200)
     plt.show()
     
     
