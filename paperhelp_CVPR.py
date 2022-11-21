@@ -12,6 +12,7 @@ CVF_URL = "https://openaccess.thecvf.com/"
 def download_file(url, dir, filename):
     r = requests.get(url, stream=False,allow_redirects=True)
     filename=re.sub('[:\?/+"<>]'," ",filename)
+    filename = re.sub("[\u4e00-\u9fa5]", "", filename)
     open(f"{dir}/{filename}.pdf", 'wb').write(r.content)
 
 class PaperHelper:
@@ -41,7 +42,7 @@ class PaperHelper:
         paper_idx_list = self.search_keyword(kw)
         try:
             assert len(paper_idx_list) > 0
-            download_dir = f"./CVPR{self.year}-{kw}/"
+            download_dir = f"./CVPR{self.year}/CVPR{self.year}-{kw}/"
             print (f"Downloading in {download_dir}...")
             os.makedirs(download_dir, exist_ok=True)
             bar = tqdm(paper_idx_list)
@@ -54,9 +55,9 @@ class PaperHelper:
             
     
 if __name__ == '__main__':
-    kw = "survival"
+    kw = "prognosis"
     # kw='graph'
     # kw=sys.argv[1]
-    helper = PaperHelper(2020)
+    helper = PaperHelper(2022)
     print(f"Searching for \"{kw}\"...")
     helper.download_keyword(kw)

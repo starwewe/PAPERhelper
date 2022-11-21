@@ -55,7 +55,7 @@ class PaperHelper:
             
     
 if __name__ == '__main__':
-    kw = "Pathology"
+    kw = "prognosis"
     # kw='graph'
     # kw=sys.argv[1]
     helper = PaperHelper(2021)
